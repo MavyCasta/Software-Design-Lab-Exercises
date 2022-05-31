@@ -1,0 +1,36 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>&lt;diagram program="umletino" version="14.4.0-SNAPSHOT"&gt;&lt;zoom_level&gt;10&lt;/zoom_level&gt;&lt;element&gt;&lt;id&gt;Relation&lt;/id&gt;&lt;coordinates&gt;&lt;x&gt;320&lt;/x&gt;&lt;y&gt;260&lt;/y&gt;&lt;w&gt;80&lt;/w&gt;&lt;h&gt;90&lt;/h&gt;&lt;/coordinates&gt;&lt;panel_attributes&gt;lt=.&amp;gt;
+&amp;lt;&amp;lt;extends&amp;gt;&amp;gt;&lt;/panel_attributes&gt;&lt;additional_attributes&gt;10;10;10;70&lt;/additional_attributes&gt;&lt;/element&gt;&lt;/diagram&gt;Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>160</x><y>8</y><w>210</w><h>260</h></coordinates><panel_attributes>View
+--
+-class View:
+-__init__(self, d):
++self.doctor
++self.doctorLabel
++self.patientLabel
++self.patientField
++self.respondButton
++self.leaveButton
++self.newButton
+-respond(self):
++self.patientField.getText()
+-leave(self):
++self.doctor.signoff()
+-new(self):
++self.doctor.greeting()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>318</y><w>210</w><h>240</h></coordinates><panel_attributes>Doctor
+--
+class Doctor:
+-__init__(self):
++self.hedges
++self.qualifiers
++self.replacements
+-greeting(self):
++return str
+-signoff(self):
++return str
+-reply(self, sentence):
++probability = random.randint(1, 4)
+-changePerson(self, sentence):
++replyWords = []
++self.replacements.get(word, word)
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>470</x><y>128</y><w>60</w><h>110</h></coordinates><panel_attributes>Patient</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>460</x><y>398</y><w>60</w><h>110</h></coordinates><panel_attributes>Doctor</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>138</y><w>130</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;110;20</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>418</y><w>120</w><h>40</h></coordinates><panel_attributes></panel_attributes><additional_attributes>10;20;100;20</additional_attributes></element><element><id>Relation</id><coordinates><x>320</x><y>260</y><w>130</w><h>80</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;sends response&gt;&gt;</panel_attributes><additional_attributes>10;10;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>180</x><y>260</y><w>130</w><h>80</h></coordinates><panel_attributes>lt=.&gt;
+&lt;&lt;Receives Reply&gt;&gt;</panel_attributes><additional_attributes>10;60;10;10</additional_attributes></element><element><id>UMLActor</id><coordinates><x>460</x><y>398</y><w>60</w><h>110</h></coordinates><panel_attributes>Doctor</panel_attributes><additional_attributes></additional_attributes></element></diagram>

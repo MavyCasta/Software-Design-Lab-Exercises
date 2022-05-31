@@ -1,0 +1,19 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>130</x><y>30</y><w>210</w><h>190</h></coordinates><panel_attributes>Cards
+--
++ rank: int
++ suit: str
+--
+- __init__(self: Card, rank: int, suit: str)
++ color(self: Card) : str
+- __init__(self) : str</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>130</x><y>320</y><w>210</w><h>190</h></coordinates><panel_attributes>Deck
+--
+- cards : Card[]
+--
+- __init__(self : Deck)
+- __str__(self) : str
++ deal(self : Deck) : Card
++ add_to_top(self : Deck, c : Card)
++ add_to_bottom(self : Deck, c : Card)
++ count(self: Deck) : int
++ is_empty(self: Deck) : bool
++ shuffle(self: Deck) </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>210</y><w>30</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Text</id><coordinates><x>240</x><y>220</y><w>100</w><h>70</h></coordinates><panel_attributes>0..*</panel_attributes><additional_attributes></additional_attributes></element></diagram>
