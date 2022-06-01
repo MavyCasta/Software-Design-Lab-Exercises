@@ -1,44 +1,150 @@
-class polynomial:
-def __init__(self, coeff = 0, pow = 0, nxt = None):
-   self.coefficient = coeff
-   self.power = pow
-   self.next = nxt
-def create_poly(expression):
-   head = None
-   for element in expression:
-      if head == None:
-         head = polynomial(element[0], element[1])
-      else:
-         temp = head
-      while temp.next != None:
-         temp = temp.next
-         if temp.next == None:
-            temp.next = polynomial(element[0], element[1])
-            return head
-def show_poly(head):
-   temp = head
-   while temp.next != None:
-      print(str(temp.coefficient) + 'x^' + str(temp.power), end = ' + ')
-      temp = temp.next
-      if temp.next == None:
-         print(str(temp.coefficient) + 'x^' + str(temp.power), end=' = 0')
-def solve(poly1, poly2):
-   dummy = node = polynomial()
-   while poly1 and poly2:
-      if poly1.power > poly2.power:
-         node.next = node = poly1
-         poly1 = poly1.next
-      elif poly1.power < poly2.power:
-         node.next = node = poly2
-         poly2 = poly2.next
-      else:
-         coef = poly1.coefficient + poly2.coefficient
-      if coef: node.next = node = polynomial(coef, poly1.power)
-         poly1 = poly1.next
-         poly2 = poly2.next
-         node.next = poly1 or poly2
-   return dummy.next
-poly1 = create_poly([[1,1], [1,2]])
-poly2 = create_poly([[2,1], [3, 0]])
-poly3 = solve(poly1, poly2)
-show_poly(poly3)
+class Node:
+    def __init__(self, data, power):
+        self.data = data
+        self.power = power
+        self.next = None
+
+    #  Update node value
+    def updateRecord(self, data, power):
+        self.data = data
+        self.power = power
+
+
+class AddPolynomial:
+    def __init__(self):
+        self.head = None
+
+    #  Display given polynomial nodes
+    def display(self):
+        if (self.head == None):
+            print("Empty Polynomial ")
+
+        print(" ", end="")
+        temp = self.head
+        while (temp != None):
+            if (temp != self.head):
+                print("+", temp.data, end="")
+            else:
+                print(temp.data, end="")
+
+            if (temp.power != 0):
+                print("x^", temp.power, end=" ", sep="")
+
+            #  Visit to next node
+            temp = temp.next
+
+        print(end="\n")
+
+    #  Add node with given data and power
+    def addNode(self, data, power):
+        if (self.head == None):
+            #  Add first node
+            self.head = Node(data, power)
+        else:
+            node = None
+            temp = self.head
+            location = None
+            #  Find the valid new node location
+            while (temp != None and temp.power >= power):
+                location = temp
+                temp = temp.next
+
+            if (location != None and location.power == power):
+                #  When polynomial power already exists
+                #  Then add current add to previous data
+                location.data = location.data + data
+            else:
+                node = Node(data, power)
+                if (location == None):
+                    #  When add node in begining
+                    node.next = self.head
+                    self.head = node
+                else:
+                    #  When adding node in intermediate
+                    #  location or end location
+                    node.next = location.next
+                    location.next = node
+
+    #  Add two polynomial
+    def addTwoPolynomials(self, other):
+        #  Define some useful variable
+        result = None
+        tail = None
+        node = None
+        #  Get first node of polynomial
+        first = self.head
+        second = other.head
+        #  Execute loop until when polynomial are exist
+        #  And add two polynomial.
+        #  Process takes O(n) time.
+        while (first != None or second != None):
+            #  Create node with default value
+            node = Node(0, 0)
+            if (result == None):
+                #  When first resultant node
+                result = node
+
+            if (first != None and second != None):
+                if (first.power == second.power):
+                    #  When the polynomial node power are same
+                    node.updateRecord(first.data + second.data, first.power)
+                    first = first.next
+                    second = second.next
+                elif (first.power > second.power):
+                    #  When first polynomial power are larger
+                    node.updateRecord(first.data, first.power)
+                    first = first.next
+                else:
+                    #  When second polynomial power are larger
+                    node.updateRecord(second.data, second.power)
+                    second = second.next
+
+            elif (first != None):
+                #  When first polynomial are not empty
+                #  Update the current node information
+                node.updateRecord(first.data, first.power)
+                first = first.next
+            else:
+                #  When second polynomial are not empty
+                node.updateRecord(second.data, second.power)
+                second = second.next
+
+            if (tail == None):
+                tail = node
+            else:
+                #  Add new node at end of resultant polynomial
+                tail.next = node
+                tail = node
+
+        #  return first node
+        return result
+
+
+def main():
+    poly1 = AddPolynomial()
+    poly2 = AddPolynomial()
+    result = AddPolynomial()
+    #  Add node in polynomial poly1
+    poly1.addNode(9, 3)
+    poly1.addNode(4, 2)
+    poly1.addNode(3, 0)
+    poly1.addNode(7, 1)
+    poly1.addNode(3, 4)
+    #  Add node in polynomial poly2
+    poly2.addNode(7, 3)
+    poly2.addNode(4, 0)
+    poly2.addNode(6, 1)
+    poly2.addNode(1, 2)
+    #  Display Polynomial nodes
+    print("\n Polynomial A")
+    poly1.display()
+    print(" Polynomial B")
+    poly2.display()
+    result.head = poly1.addTwoPolynomials(poly2)
+    #  Display calculated result
+    print(" Result")
+    result.display()
+
+
+if __name__ == "__main__":
+    main()
