@@ -69,9 +69,3 @@ class Doctor():
         for word in words:
             replyWords.append(self.replacements.get(word, word))
         return " ".join(replyWords)
-def main():
-    d = Doctor()
-    v = View(d)
-    v.mainloop()
-if __name__=="__main__":
-    main()
